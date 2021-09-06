@@ -9,7 +9,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.yedam.app.board.domain.BoardVO;
-import com.yedam.app.board.service.BoardService;
+import com.yedam.app.board.domain.Criteria;
+import com.yedam.app.board.mapper.BoardMapper;
 
 import lombok.extern.java.Log;
 
@@ -18,14 +19,17 @@ import lombok.extern.java.Log;
 @ContextConfiguration("classpath:/spring/*-context.xml")
 public class BoardMapperClient {
 	
-	@Autowired BoardService boardMapper;
-	
-	//@Test
-	public void getList() {
-		log.info(boardMapper.getList().toString());
-	}
+	@Autowired BoardMapper boardMapper;
 	
 	@Test
+	public void getList() {
+		Criteria cri = new Criteria(1,20);
+		cri.setType("T");
+		cri.setKeyword("java");
+		log.info(boardMapper.getList(cri).toString());
+	}
+	
+	//@Test
 	public void insert() {
 		//BoardVO 생성
 		BoardVO vo = new BoardVO();
