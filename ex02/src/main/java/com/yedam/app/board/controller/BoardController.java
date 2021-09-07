@@ -17,7 +17,7 @@ import com.yedam.app.board.service.BoardService;
 
 @Controller
 @RequestMapping("/board/*")
-@SessionAttributes("cri")
+//@SessionAttributes("cri")
 public class BoardController {
 
 	@Autowired BoardService boardService;
