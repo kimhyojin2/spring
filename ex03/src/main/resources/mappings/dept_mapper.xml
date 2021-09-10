@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yedam.app.employees.mapper.DepartmentsMapper">
+
+
+	<select id = "read" resultType="DepartmentsVO" parameterType="DepartmentsVO">
+		SELECT EMPLOYEE_ID
+			  ,FIRST_NAME
+			  ,LAST_NAME
+			  ,EMAIL
+			  ,PHONE_NUMBER
+			  ,HIRE_DATE
+			  ,JOB_ID
+			  ,SALARY
+			  ,COMMISSION_PCT
+			  ,MANAGER_ID
+			  ,DEPARTMENT_ID
+		FROM EMPLOYEES
+		WHERE EMPLOYEE_ID = #{employee_id}
+	</select>
+	
+	<insert id = "insert">
+		<selectKey keyProperty="employee_id" resultType="long" order="BEFORE">
+			SELECT SEQ_EMPLOYEES.NEXTVAL
+			FROM DUAL
+		</selectKey>
+			INSERT INTO EMPLOYEES(
+				EMPLOYEE_ID
+			   ,FIRST_NAME
+			   ,LAST_NAME
+			   ,EMAIL
+			   ,PHONE_NUMBER
+			   ,HIRE_DATE
+			   ,JOB_ID
+			   ,SALARY
+			   ,COMMISSION_PCT
+			   ,MANAGER_ID
+			   ,DEPARTMENT_ID
+			)
+			VALUES(
+				#{employee_id}
+			   ,#{first_name}
+			   ,#{last_name}
+			   ,#{email}
+			   ,#{phone_number}
+			   ,#{hire_date}
+			   ,#{job_id}
+			   ,#{salary}
+			   ,#{commission_pct}
+			   ,#{manager_id}
+			   ,#{department_id}
+			)
+	</insert>
+	
+	<select id = "getDeptList" resultType = "DepartmentsVO">
+		SELECT *
+		FROM DEPARTMENTS
+		ORDER BY DEPARTMENT_ID
+	</select>
+	
+</mapper>

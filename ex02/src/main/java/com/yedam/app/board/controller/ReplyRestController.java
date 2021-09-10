@@ -1,7 +1,5 @@
 package com.yedam.app.board.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yedam.app.board.domain.Criteria;
+import com.yedam.app.board.domain.ReplyPageVO;
 import com.yedam.app.board.domain.ReplyVO;
 import com.yedam.app.board.service.ReplyService;
 
@@ -25,7 +24,7 @@ public class ReplyRestController {
 	
 	//해당 게시글의 댓글만
 	@GetMapping("/")
-	public List<ReplyVO> getList(Criteria cri, @RequestParam Long bno) {
+	public ReplyPageVO getList(Criteria cri, @RequestParam Long bno) {
 		return replyService.getList(cri, bno);
 	}
 	

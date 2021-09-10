@@ -26,4 +26,7 @@ public interface ReplyMapper {
 			@Param("cri")Criteria cri,
 			@Param("bno") Long bno);
 	
+	//해당 게시글의 댓글 수 조회
+	public int getCountByBno(Long bno);
+	
 }

@@ -1,10 +1,9 @@
 package com.yedam.app.board.service;
 
-import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
 
 import com.yedam.app.board.domain.Criteria;
+import com.yedam.app.board.domain.ReplyPageVO;
 import com.yedam.app.board.domain.ReplyVO;
 
 public interface ReplyService {
@@ -22,7 +21,7 @@ public interface ReplyService {
 		public ReplyVO read(ReplyVO vo);
 		
 		//전체조회
-		public List<ReplyVO> getList(
+		public ReplyPageVO getList(
 				@Param("cri")Criteria cri,
 				@Param("bno") Long bno);
 }

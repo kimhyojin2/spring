@@ -1,5 +1,7 @@
 package com.yedam.app.board;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.yedam.app.board.domain.Criteria;
+import com.yedam.app.board.domain.ReplyVO;
 import com.yedam.app.board.mapper.ReplyMapper;
 import com.yedam.app.board.service.ReplyService;
 
@@ -25,5 +28,6 @@ public class ReplyMapperClient {
 		Criteria cri = new Criteria(1,20);
 		log.info(replyService.getList(cri, 159L).toString());
 	}
+	
 
 }

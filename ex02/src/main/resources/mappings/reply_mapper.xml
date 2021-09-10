@@ -2,6 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yedam.app.board.mapper.ReplyMapper">
 
+	<select id = "getCountByBno" resultType = "int">
+		SELECT COUNT(*) 
+		FROM TBL_REPLY
+		WHERE BNO = #{bno}
+	</select>
+
 	<insert id = "insert">
 		<selectKey keyProperty="rno" resultType="long" order="BEFORE">
 			SELECT SEQ_REPLY.NEXTVAL
@@ -46,14 +52,21 @@
 	</update>
 	
 	<select id="getList" resultType = "ReplyVO">
+		
 		SELECT RNO,
 			   BNO,
 			   REPLY,
 			   REPLYER,
 			   REPLYDATE,
 			   UPDATEDATE
-		FROM TBL_REPLY
-		WHERE BNO = #{bno}
-		ORDER BY RNO ASC
+		FROM(SELECT /* + INDEX(TBL_REPLY IDX_REPLY) */
+				ROWNUM RN, RNO, BNO, REPLY, REPLYER, REPLYDATE, UPDATEDATE
+    		FROM TBL_REPLY
+    		WHERE BNO = #{bno}
+    		AND RNO > 0
+    		<![CDATA[ AND ROWNUM <= #{cri.pageNum} * #{cri.amount}]]>
+    		)a
+    		 where rn > (#{cri.pageNum}-1) * #{cri.amount}
+    		
 	</select>
 </mapper>

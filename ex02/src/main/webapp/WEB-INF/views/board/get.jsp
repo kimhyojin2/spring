@@ -57,6 +57,8 @@
                <button type="button" class="btn btn-secondary"
                   onclick="location.href='${pageContext.request.contextPath}/board/list?pageNum=${cri.pageNum}&amount=${cri.amount}'">List</button>
             </form>
+            <c:forEach items = "${board.attachList }" var = "attach"><a href = "download?uuid=${attach.uuid}">${attach.fileName}</a>
+            </c:forEach>
             <br>
             <!-- 댓글 등록 -->
             <div class="panel-heading" align="center">
